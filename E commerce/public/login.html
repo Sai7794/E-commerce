@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraStore | Sign In</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <i class="fa-solid fa-cube text-accent"></i> Aura<span>Store</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item">Shop</a></li>
+          <li id="nav-dashboard-link" class="hidden"><a href="dashboard.html" class="nav-item">My Orders</a></li>
+          <li id="nav-admin-link" class="hidden"><a href="admin.html" class="nav-item">Admin Panel</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <span id="nav-user-greeting" style="font-size: 14px; font-weight: 500; color: var(--text-secondary);" class="hidden"></span>
+        <a href="login.html" id="nav-login-btn" class="btn btn-secondary btn-sm active">Login</a>
+        <button id="nav-logout-btn" class="btn btn-secondary btn-sm hidden">Logout</button>
+        
+        <button class="icon-btn" id="cart-toggle-btn" aria-label="Open Cart">
+          <i class="fa-solid fa-shopping-bag"></i>
+          <span class="badge" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content" style="display: flex; align-items: center; justify-content: center; min-height: 80vh;">
+    <div class="glass-card form-container" style="width: 100%;">
+      
+      <!-- Authentication Tabs -->
+      <div class="admin-tabs" style="justify-content: center; margin-bottom: 32px;">
+        <button id="tab-login-btn" class="admin-tab-btn active">Sign In</button>
+        <button id="tab-register-btn" class="admin-tab-btn">Register</button>
+      </div>
+
+      <!-- Login Form Panel -->
+      <div id="login-panel">
+        <h3 class="form-title" style="display:none;">Welcome Back</h3>
+        <p class="form-subtitle" style="margin-bottom: 24px; text-align: center;">Enter your credentials to access your store account.</p>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" required>
+          </div>
+          
+          <div id="login-error-msg" style="color: var(--danger); font-size: 14px; margin-bottom: 16px; text-align: center;" class="hidden"></div>
+          
+          <button type="submit" class="btn btn-primary btn-block">Sign In To Account</button>
+        </form>
+
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 12px; margin-top: 24px; font-size: 13px; text-align: center;">
+          <p style="color: var(--text-secondary); margin-bottom: 4px;"><strong>Demo Admin Access:</strong></p>
+          <code style="color: var(--accent-secondary);">admin@store.com / admin123</code>
+        </div>
+      </div>
+
+      <!-- Register Form Panel -->
+      <div id="register-panel" class="hidden">
+        <h3 class="form-title" style="display:none;">Create Account</h3>
+        <p class="form-subtitle" style="margin-bottom: 24px; text-align: center;">Join us to track orders and save shopping preferences.</p>
+        
+        <form id="register-form">
+          <div class="form-group">
+            <label for="register-name">Full Name</label>
+            <input type="text" id="register-name" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email Address</label>
+            <input type="email" id="register-email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password (min 6 characters)</label>
+            <input type="password" id="register-password" minlength="6" placeholder="••••••••" required>
+          </div>
+          
+          <!-- Simple demo role selection (for testing) -->
+          <div class="form-group">
+            <label for="register-role">Account Type</label>
+            <select id="register-role">
+              <option value="user">Standard Customer</option>
+              <option value="admin">Administrator</option>
+            </select>
+          </div>
+          
+          <div id="register-error-msg" style="color: var(--danger); font-size: 14px; margin-bottom: 16px; text-align: center;" class="hidden"></div>
+          
+          <button type="submit" class="btn btn-primary btn-block">Register Account</button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shopping Cart Drawer Overlay (Standard boilerplate to avoid crashes) -->
+  <div class="cart-drawer-overlay" id="cart-overlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Shopping Bag</h3>
+        <button class="icon-btn" id="cart-close-btn" style="background:none; border:none; font-size: 18px;" aria-label="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="cart-body" id="cart-items-container"></div>
+      <div class="cart-footer">
+        <div class="cart-summary-line"><span>Total</span><span id="cart-summary-total">$0.00</span></div>
+        <button class="btn btn-primary btn-block" id="cart-checkout-btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

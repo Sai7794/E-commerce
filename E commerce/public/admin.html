@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraStore | Admin Management</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <i class="fa-solid fa-cube text-accent"></i> Aura<span>Store</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item">Shop</a></li>
+          <li id="nav-dashboard-link" class="hidden"><a href="dashboard.html" class="nav-item">My Orders</a></li>
+          <li id="nav-admin-link" class="hidden"><a href="admin.html" class="nav-item active">Admin Panel</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <span id="nav-user-greeting" style="font-size: 14px; font-weight: 500; color: var(--text-secondary);" class="hidden"></span>
+        <a href="login.html" id="nav-login-btn" class="btn btn-secondary btn-sm">Login</a>
+        <button id="nav-logout-btn" class="btn btn-secondary btn-sm hidden">Logout</button>
+        
+        <button class="icon-btn" id="cart-toggle-btn" aria-label="Open Cart">
+          <i class="fa-solid fa-shopping-bag"></i>
+          <span class="badge" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <div class="admin-grid">
+      
+      <div class="admin-header">
+        <div>
+          <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800;">Management Console</h2>
+          <p style="color: var(--text-secondary); margin-top: 4px;">Regulate catalog stock and fulfill incoming product order streams.</p>
+        </div>
+        
+        <div class="admin-tabs" style="margin-bottom: 0;">
+          <button id="tab-products-btn" class="admin-tab-btn active"><i class="fa-solid fa-boxes-stacked"></i> Products</button>
+          <button id="tab-orders-btn" class="admin-tab-btn"><i class="fa-solid fa-receipt"></i> Orders</button>
+        </div>
+      </div>
+
+      <!-- Products Management Area -->
+      <section id="admin-products-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+          <h3 style="font-family: var(--font-display); font-size: 20px;">Catalog Registry</h3>
+          <button class="btn btn-primary btn-sm" id="admin-add-product-btn"><i class="fa-solid fa-plus"></i> Register Product</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Product Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>In Stock</th>
+                <th style="text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-table-body">
+              <!-- Dynamically Populated -->
+              <tr>
+                <td colspan="6" class="text-center" style="padding: 40px 0;">
+                  <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 24px; color: var(--accent-primary);"></i>
+                  <p class="mt-4" style="color: var(--text-secondary);">Retrieving register entries...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Orders Management Area -->
+      <section id="admin-orders-section" class="hidden">
+        <h3 style="font-family: var(--font-display); font-size: 20px; margin-bottom:24px;">Client Purchases</h3>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Buyer</th>
+                <th>Date Placed</th>
+                <th>Total Value</th>
+                <th>Fulfillment Status</th>
+                <th style="text-align: right;">Details</th>
+              </tr>
+            </thead>
+            <tbody id="admin-orders-table-body">
+              <!-- Dynamically Populated -->
+              <tr>
+                <td colspan="6" class="text-center" style="padding: 40px 0;">
+                  <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 24px; color: var(--accent-primary);"></i>
+                  <p class="mt-4" style="color: var(--text-secondary);">Retrieving order invoices...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Product Create/Edit Modal Overlay -->
+  <div class="modal-overlay" id="product-form-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="product-form-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <h3 class="form-title" id="product-form-title" style="margin-bottom: 8px;">Register Product</h3>
+      <p class="form-subtitle" id="product-form-subtitle">Define catalog parameters for the shop.</p>
+      
+      <form id="product-form">
+        <input type="hidden" id="form-product-id">
+        
+        <div class="form-group">
+          <label for="form-product-name">Product Title</label>
+          <input type="text" id="form-product-name" placeholder="E.g. wireless headset" required>
+        </div>
+        
+        <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+          <div>
+            <label for="form-product-price" style="display:block; font-size:14px; margin-bottom:8px; color:var(--text-secondary);">Price ($)</label>
+            <input type="number" id="form-product-price" step="0.01" min="0" placeholder="99.99" style="width:100%; padding:12px; background:var(--bg-input); border:1px solid var(--border-color); border-radius:var(--border-radius-md);" required>
+          </div>
+          <div>
+            <label for="form-product-stock" style="display:block; font-size:14px; margin-bottom:8px; color:var(--text-secondary);">Initial Stock</label>
+            <input type="number" id="form-product-stock" min="0" placeholder="10" style="width:100%; padding:12px; background:var(--bg-input); border:1px solid var(--border-color); border-radius:var(--border-radius-md);" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-product-image">Image URL</label>
+          <input type="url" id="form-product-image" placeholder="https://images.unsplash.com/... or relative path" required>
+        </div>
+
+        <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+          <div>
+            <label for="form-product-category" style="display:block; font-size:14px; margin-bottom:8px; color:var(--text-secondary);">Category</label>
+            <select id="form-product-category" style="width:100%;">
+              <option value="Electronics">Electronics</option>
+              <option value="Wearables">Wearables</option>
+              <option value="Home & Decor">Home & Decor</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+          <div>
+            <label for="form-product-brand" style="display:block; font-size:14px; margin-bottom:8px; color:var(--text-secondary);">Brand Name</label>
+            <input type="text" id="form-product-brand" placeholder="E.g. Sony" style="width:100%; padding:12px; background:var(--bg-input); border:1px solid var(--border-color); border-radius:var(--border-radius-md);" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-product-description">Detailed Description</label>
+          <textarea id="form-product-description" rows="3" placeholder="Provide full features..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="product-form-submit-btn">Save Product Specification</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Drawer Overlay (Boilerplate) -->
+  <div class="cart-drawer-overlay" id="cart-overlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Shopping Bag</h3>
+        <button class="icon-btn" id="cart-close-btn" style="background:none; border:none; font-size: 18px;" aria-label="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="cart-body" id="cart-items-container"></div>
+      <div class="cart-footer">
+        <div class="cart-summary-line"><span>Total</span><span id="cart-summary-total">$0.00</span></div>
+        <button class="btn btn-primary btn-block" id="cart-checkout-btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

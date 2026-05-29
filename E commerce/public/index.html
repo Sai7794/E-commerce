@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraStore | Premium E-Commerce Platform</title>
+  <meta name="description" content="Discover premium electronics, wearables, and accessories on AuraStore. Safe checkout and real-time order tracking.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <i class="fa-solid fa-cube text-accent"></i> Aura<span>Store</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item active">Shop</a></li>
+          <li id="nav-dashboard-link" class="hidden"><a href="dashboard.html" class="nav-item">My Orders</a></li>
+          <li id="nav-admin-link" class="hidden"><a href="admin.html" class="nav-item">Admin Panel</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <span id="nav-user-greeting" style="font-size: 14px; font-weight: 500; color: var(--text-secondary);" class="hidden"></span>
+        <a href="login.html" id="nav-login-btn" class="btn btn-secondary btn-sm">Login</a>
+        <button id="nav-logout-btn" class="btn btn-secondary btn-sm hidden">Logout</button>
+        
+        <button class="icon-btn" id="cart-toggle-btn" aria-label="Open Cart">
+          <i class="fa-solid fa-shopping-bag"></i>
+          <span class="badge" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Unleash the Next Wave of <span>Aesthetic Tech</span></h1>
+        <p>A curated experience of premium electronics, wearable devices, and smart desktop accessories crafted for modern creators and professionals.</p>
+        <a href="#catalog" class="btn btn-primary">Browse Collection <i class="fa-solid fa-arrow-down"></i></a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=80" alt="Premium Tech Setup">
+      </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section id="catalog">
+      <div class="catalog-header">
+        <div class="catalog-title">
+          <h2>Our Collection</h2>
+        </div>
+        
+        <div class="filters">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-input" placeholder="Search premium items...">
+          </div>
+          
+          <div class="filter-group">
+            <div class="select-wrapper">
+              <select id="category-filter">
+                <option value="">All Categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Wearables">Wearables</option>
+                <option value="Home & Decor">Home & Decor</option>
+                <option value="Accessories">Accessories</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading skeleton and grid -->
+      <div class="product-grid" id="product-grid-container">
+        <!-- Injected via JavaScript -->
+        <div class="text-center" style="grid-column: 1 / -1; padding: 40px 0;">
+          <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 36px; color: var(--accent-primary);"></i>
+          <p class="mt-4" style="color: var(--text-secondary);">Loading premium catalog...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shopping Cart Drawer Overlay -->
+  <div class="cart-drawer-overlay" id="cart-overlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Shopping Bag</h3>
+        <button class="icon-btn" id="cart-close-btn" style="background:none; border:none; font-size: 18px;" aria-label="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="cart-body" id="cart-items-container">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-summary-line">
+          <span style="color: var(--text-secondary);">Subtotal</span>
+          <span id="cart-summary-subtotal">$0.00</span>
+        </div>
+        <div class="cart-summary-line">
+          <span style="color: var(--text-secondary);">Shipping</span>
+          <span id="cart-summary-shipping">FREE</span>
+        </div>
+        <div class="cart-summary-total">
+          <span>Total</span>
+          <span id="cart-summary-total">$0.00</span>
+        </div>
+        <button class="btn btn-primary btn-block" id="cart-checkout-btn">Proceed to Checkout <i class="fa-solid fa-credit-card"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Detail Modal Overlay -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-content" style="max-width: 800px;">
+      <button class="modal-close" id="product-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div id="product-detail-modal-body">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal Overlay -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="checkout-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <h3 class="form-title" style="margin-bottom: 8px;">Complete Order</h3>
+      <p class="form-subtitle">Fill in your shipping details below.</p>
+      
+      <form id="checkout-form">
+        <div class="form-group">
+          <label for="checkout-address">Delivery Address</label>
+          <input type="text" id="checkout-address" placeholder="123 Cyberpunk Blvd" required>
+        </div>
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+          <div>
+            <label for="checkout-city" style="display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-secondary);">City</label>
+            <input type="text" id="checkout-city" placeholder="Neo Tokyo" style="width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);" required>
+          </div>
+          <div>
+            <label for="checkout-postal" style="display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-secondary);">Postal Code</label>
+            <input type="text" id="checkout-postal" placeholder="94016" style="width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="checkout-country">Country</label>
+          <input type="text" id="checkout-country" placeholder="Japan" required>
+        </div>
+        <div class="form-group">
+          <label for="checkout-payment">Payment Method</label>
+          <select id="checkout-payment" style="width: 100%;">
+            <option value="Credit Card">Credit/Debit Card (Mocked)</option>
+            <option value="Crypto">Ethereum Wallet (Mocked)</option>
+          </select>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.02); padding: 16px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); margin-bottom: 24px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span>Order Total:</span>
+            <span id="checkout-total-price" style="font-weight: 700; color: var(--accent-secondary);">$0.00</span>
+          </div>
+          <span style="font-size: 12px; color: var(--text-secondary);"><i class="fa-solid fa-lock"></i> Secured payment processing simulated.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Authorize Payment & Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

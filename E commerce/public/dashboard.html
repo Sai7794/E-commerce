@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraStore | My Orders</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <i class="fa-solid fa-cube text-accent"></i> Aura<span>Store</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item">Shop</a></li>
+          <li id="nav-dashboard-link" class="hidden"><a href="dashboard.html" class="nav-item active">My Orders</a></li>
+          <li id="nav-admin-link" class="hidden"><a href="admin.html" class="nav-item">Admin Panel</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <span id="nav-user-greeting" style="font-size: 14px; font-weight: 500; color: var(--text-secondary);" class="hidden"></span>
+        <a href="login.html" id="nav-login-btn" class="btn btn-secondary btn-sm">Login</a>
+        <button id="nav-logout-btn" class="btn btn-secondary btn-sm hidden">Logout</button>
+        
+        <button class="icon-btn" id="cart-toggle-btn" aria-label="Open Cart">
+          <i class="fa-solid fa-shopping-bag"></i>
+          <span class="badge" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <div class="dashboard-grid">
+      
+      <!-- Profile Welcome -->
+      <div class="user-profile-header">
+        <div>
+          <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800;">Welcome Back, <span id="dashboard-user-name" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Customer</span>!</h2>
+          <p style="color: var(--text-secondary); margin-top: 4px;">Track your fulfillment status and review order invoices.</p>
+        </div>
+        <div style="text-align: right;">
+          <span style="font-size: 14px; color: var(--text-muted);">Registered Email:</span>
+          <p id="dashboard-user-email" style="font-weight: 600; color: var(--text-secondary);"></p>
+        </div>
+      </div>
+
+      <!-- Order History List -->
+      <section>
+        <h3 style="font-family: var(--font-display); font-size: 22px; margin-bottom: 24px;"><i class="fa-solid fa-clock-rotate-left"></i> Purchase Timeline</h3>
+        
+        <div class="order-list" id="order-list-container">
+          <!-- Loading status -->
+          <div class="text-center glass-card" style="padding: 60px 0;">
+            <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 36px; color: var(--accent-primary);"></i>
+            <p class="mt-4" style="color: var(--text-secondary);">Loading your order timeline...</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shopping Cart Drawer Overlay (Boilerplate) -->
+  <div class="cart-drawer-overlay" id="cart-overlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Shopping Bag</h3>
+        <button class="icon-btn" id="cart-close-btn" style="background:none; border:none; font-size: 18px;" aria-label="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="cart-body" id="cart-items-container"></div>
+      <div class="cart-footer">
+        <div class="cart-summary-line"><span>Total</span><span id="cart-summary-total">$0.00</span></div>
+        <button class="btn btn-primary btn-block" id="cart-checkout-btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
